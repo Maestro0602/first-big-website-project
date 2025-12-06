@@ -17,12 +17,11 @@ a {
     text-decoration: none;
 }
 
-
 /* video slider container */
 .video-slider {
     position: relative;
     width: 100%;
-    height: 100vh; /* full viewport */
+    height: 100vh;
     overflow: hidden;
 }
 
@@ -35,7 +34,7 @@ a {
     top: 0;
     left: 0;
     opacity: 0;
-    transform: translateX(-30px); /* starting offset */
+    transform: translateX(-30px);
     animation: slide 12s infinite;
 }
 
@@ -48,19 +47,19 @@ a {
 @keyframes slide {
     0% { 
         opacity: 0;
-        transform: translateX(-30px); /* slide left */
+        transform: translateX(-30px);
     }
     8% { 
         opacity: 1;
-        transform: translateX(0); /* slides in */
+        transform: translateX(0);
     }
     33% { 
         opacity: 1;
-        transform: translateX(0); /* stays center */
+        transform: translateX(0);
     }
     41% { 
         opacity: 0;
-        transform: translateX(30px); /* slide right */
+        transform: translateX(30px);
     }
     100% { 
         opacity: 0;
@@ -79,7 +78,7 @@ a {
     flex-direction: column;
     align-items: flex-end;
     width: max-content;
-    z-index: 10; /* above video */
+    z-index: 10;
 }
 
 .navbar {
@@ -93,7 +92,6 @@ a {
     margin-bottom: 8px;
 }
 
-/* Hover effect for links */
 .navbar li {
     cursor: pointer;
     transition: opacity 0.3s ease;
@@ -103,11 +101,10 @@ a {
     opacity: 0.6;
 }
 
-/* HR under navbar */
 .header hr {
     border: none;
     height: 2px;
-    width: 120%; /* slightly longer than navbar */
+    width: 120%;
 }
 
 h1 {
@@ -119,7 +116,7 @@ h1 {
 }
 
 /* FEATURE TITLE */
-.feature{
+.feature {
     text-align: center;
     margin-top: 40px;
     margin-bottom: 60px;
@@ -155,14 +152,12 @@ h1 {
     width: 750px;
     background: linear-gradient(145deg, #ffffff 0%, #f8f8f8 100%);
     border-radius: 20px;
-    /* Main shadow for depth */
     box-shadow: 
         0 10px 40px rgba(0, 0, 0, 0.3),
         0 2px 8px rgba(0, 0, 0, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.9);
     padding: 25px 35px;
     overflow: hidden;
-    /* Simple gold border - easier to customize */
     border: 2px solid transparent;
     background-clip: padding-box;
     outline: 2px solid rgba(247, 199, 39, 0.698);
@@ -196,7 +191,6 @@ h1 {
     gap: 8px;
 }
 
-/* Appear on top of car */
 .year {
     position: absolute;
     top: 12px;
@@ -270,14 +264,22 @@ h1 {
 }
 
 /* POSTER SECTION */
-
-/* TO contain all poster */
 .poster-container {
     display: flex;
     gap: 40px;
-    padding: 40px;
-    justify-content: center;
+    padding: 40px 30px;
     margin-top: 80px;
+    overflow-x: auto;
+    justify-content: center;
+}
+
+.poster-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.poster-container::-webkit-scrollbar-thumb {
+    background: #aaa;
+    border-radius: 10px;
 }
 
 .poster {
@@ -286,8 +288,10 @@ h1 {
     grid-template-rows: 1fr;
     width: 400px;
     height: 500px;
+    flex-shrink: 0;
     overflow: hidden;
     border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .poster img {
@@ -298,13 +302,12 @@ h1 {
     object-fit: cover;
 }
 
-/* Dark overlay box at bottom left */
 .poster-text {
     grid-column: 1;
     grid-row: 1;
     align-self: end;
     justify-self: start;
-    background: rgba(0, 0, 0, 0.1);  /* Changed from 0.1 to 0.7 for better visibility */
+    background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(10px);
     padding: 25px;
     margin: 0;
@@ -335,7 +338,6 @@ h1 {
     font-family: 'Rajdhani', sans-serif;
 }
 
-/* Button inside the text box */
 .poster-button {
     padding: 12px 28px;
     background-color: #ffffff;
@@ -356,4 +358,133 @@ h1 {
     background-color: rgba(212, 175, 55, 0.9);
     color: white;
     transform: scale(1.05);
+}
+
+/* FOOTER SECTION */
+.footer {
+    background: #0a0a0a;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 60px 40px 30px;
+    margin-top: 100px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto 60px;
+}
+
+.footer-column h3 {
+    font-family: 'Russo One', sans-serif;
+    font-size: 14px;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 12px;
+}
+
+.footer-column ul li a {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+    color: #f7c727;
+}
+
+/* Social Links Section */
+.footer-social {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.social-link:hover {
+    background: rgba(247, 199, 39, 0.1);
+    transform: translateY(-2px);
+}
+
+.social-icon {
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.social-link span {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.social-link .plus {
+    margin-left: auto;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 20px;
+}
+
+/* Copyright */
+.footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .footer-content {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .footer-social {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .footer-social {
+        grid-template-columns: 1fr;
+    }
 }
