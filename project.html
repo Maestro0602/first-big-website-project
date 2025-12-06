@@ -6,24 +6,72 @@
     <title>Kirby Automobile</title>
     <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-<div class="video-slider">
+
+<section class="video-slider">
     <video src="pagani.mp4" autoplay muted loop></video>
-    <video src="video2.mp4" autoplay muted loop></video>
-    <video src="video3.mp4" autoplay muted loop></video>
-</div>
+    <video src="mercedes.mp4" autoplay muted loop></video>
+    <video src="ferrari.mp4" autoplay muted loop></video>
+</section>
 
-
-    <!-- Navbar + HR container -->
-    <div class="header">
+<header class="header">
+    <nav>
         <ul class="navbar">
             <li>Home</li>
             <li>Tag</li>
             <li>Compare</li>
             <li>About us</li>
         </ul>
-        <hr />
+    </nav>
+    <hr>
+</header>
+
+<h1 class="feature-title">Feature cars</h1>
+
+<div class="feature-cars">
+
+    <!-- pagani -->
+    <div class="car-card">
+        <a href="pagani.html">
+            <img src="pagani.jpg" alt="Pagani Huayra">
+        </a>
+        <div class="info">
+            <a href="pagani.html">
+            <p class="year">2025</p>
+            <p class="name">Pagani Huayra</p>
+            <p class="price">$5M</p>
+            <p class="details">100/238 <br> City/Track</p>
+            </a>
+        </div>
     </div>
+
+    <!-- mercedes -->
+    <div class="car-card">
+        <a href="mercedes.html">
+            <img src="F1 mercedes.jpg" alt="F1 mercedes">
+        </a>
+        <div class="info">
+            <p class="year">2019</p>
+            <p class="name">Mercedes AMG F1 Champion Car</p>
+            <p class="price">$30.5M</p>
+            <p class="details">100/334 <br> City/Track</p>
+        </div>
+    </div>
+
+    <!-- ferrari -->
+    <div class="car-card">
+        <a href="ferrari.html">
+            <img src="Ferrari.jpg" alt="Ferrari">
+        </a>
+        <div class="info">
+            <p class="year">2024</p>
+            <p class="name">Ferrari Testarossa</p>
+            <p class="price">$7M</p>
+            <p class="details">90/210 <br> City/Track</p>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
