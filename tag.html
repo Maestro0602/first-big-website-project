@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kirby Automobile</title>
+  <link rel="stylesheet" href="style2.css" />
+</head>
+<body>
+
+<header class="header">
+  <ul class="navbar">
+    <li>Home</li>
+    <li>Tag</li>
+    <li>About Us</li>
+  </ul>
+</header>
+
+<!-- FILTER BAR -->
+<div class="filter-panel">
+
+  <div class="search-box">
+    <input type="text" id="search-input" placeholder="Search model or brand" />
+  </div>
+
+  <div class="filters">
+    <select id="brand-filter">
+      <option value="">Brand</option>
+      <option>Ferrari</option>
+      <option>Lamborghini</option>
+      <option>McLaren</option>
+      <option>Porsche</option>
+    </select>
+
+    <select id="year-filter">
+      <option value="">Year</option>
+      <option>2021</option>
+      <option>2022</option>
+      <option>2023</option>
+      <option>2024</option>
+    </select>
+
+    <select id="sort-filter">
+      <option value="">Sort</option>
+      <option value="price-asc">Price ↑</option>
+      <option value="price-desc">Price ↓</option>
+      <option value="year-desc">Newest</option>
+      <option value="name-asc">Name A–Z</option>
+    </select>
+  </div>
+</div>
+
+<!-- ACTIVE FILTERS -->
+<div class="active-filters" id="active-filters">
+  <span>No filters applied</span>
+</div>
+
+<!-- CARS -->
+<section class="cars">
+  <div class="cars-container" id="car-container">
+
+    <div class="car-card"
+      data-name="Ferrari SF90"
+      data-brand="Ferrari"
+      data-year="2023"
+      data-price="4500000">
+      <h3>Ferrari SF90</h3>
+      <p>$4,500,000 • 2023</p>
+    </div>
+
+    <div class="car-card"
+      data-name="Lamborghini Revuelto"
+      data-brand="Lamborghini"
+      data-year="2024"
+      data-price="5200000">
+      <h3>Lamborghini Revuelto</h3>
+      <p>$5,200,000 • 2024</p>
+    </div>
+
+    <div class="car-card"
+      data-name="McLaren 720S"
+      data-brand="McLaren"
+      data-year="2022"
+      data-price="2900000">
+      <h3>McLaren 720S</h3>
+      <p>$2,900,000 • 2022</p>
+    </div>
+
+  </div>
+</section>
+
+<script src="tag.js"></script>
+</body>
+</html>
