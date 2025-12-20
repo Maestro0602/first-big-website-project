@@ -10,10 +10,13 @@
 <body>
 
 <section class="video-slider">
-    <video src="asset/pagani.mp4" autoplay muted loop></video>
-    <video src="asset/mercedes.mp4" autoplay muted loop></video>
-    <video src="asset/ferrari.mp4" autoplay muted loop></video>
+    <div class="video-track">
+        <video class="slide-video" src="asset/pagani.mp4" muted autoplay playsinline></video>
+        <video class="slide-video" src="asset/mercedes.mp4" muted playsinline></video>
+        <video class="slide-video" src="asset/ferrari.mp4" muted playsinline></video>
+    </div>
 </section>
+
 
 <header class="header">
     <nav>
@@ -30,78 +33,138 @@
 <h1 class="title">Feature cars</h1>
 
 <div class="feature-cars">
+    <div class="cars-container">
+        <!-- Pagani Card -->
+        <div class="car-card">
+            <div class="car-content">
+                <h2>Pagani Huayra</h2>
+                <p>An extraordinary hypercar that combines cutting-edge technology with artistic craftsmanship. The Pagani Huayra represents the pinnacle of automotive engineering and design excellence.</p>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span class="spec-label">Year</span>
+                        <span class="spec-value">2025</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Price</span>
+                        <span class="spec-value price">$5M</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Performance</span>
+                        <span class="spec-value">100/238 City/Track</span>
+                    </div>
+                </div>
+                <button class="read-more">Learn More →</button>
+            </div>
+            <div class="car-image-container">
+                <span class="year">2025</span>
+                <img src="asset/pagani.jpg" alt="Pagani Huayra">
+            </div>
+        </div>
 
-    <!-- pagani -->
-    <div class="car-card">
-        <a href="pagani.html">
-            <img src="asset/pagani.jpg" alt="Pagani Huayra">
-        </a>
-        <div class="info">
-            <a href="pagani.html">
-            <p class="year">2025</p>
-            <p class="name">Pagani Huayra</p>
-            <p class="price">$5M</p>
-            <p class="details">100/238 <br> City/Track</p>
-            </a>
+        <!-- Mercedes Card -->
+        <div class="car-card">
+            <div class="car-content">
+                <h2>Mercedes AMG F1 Champion Car</h2>
+                <p>The legendary Formula 1 championship-winning machine. This Mercedes AMG F1 car dominated the track with unparalleled speed, precision, and technological innovation.</p>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span class="spec-label">Year</span>
+                        <span class="spec-value">2019</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Price</span>
+                        <span class="spec-value price">$30.5M</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Performance</span>
+                        <span class="spec-value">100/334 City/Track</span>
+                    </div>
+                </div>
+                <button class="read-more">Learn More →</button>
+            </div>
+            <div class="car-image-container">
+                <span class="year">2019</span>
+                <img src="asset/F1 mercedes.jpg" alt="Mercedes AMG F1">
+            </div>
+        </div>
+
+        <!-- Ferrari Card -->
+        <div class="car-card">
+            <div class="car-content">
+                <h2>Ferrari Testarossa</h2>
+                <p>An iconic Italian masterpiece that defined an era. The Ferrari Testarossa combines timeless design with raw power, making it one of the most recognizable supercars in automotive history.</p>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span class="spec-label">Year</span>
+                        <span class="spec-value">2024</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Price</span>
+                        <span class="spec-value price">$7M</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Performance</span>
+                        <span class="spec-value">90/210 City/Track</span>
+                    </div>
+                </div>
+                <button class="read-more">Learn More →</button>
+            </div>
+            <div class="car-image-container">
+                <span class="year">2024</span>
+                <img src="asset/Ferrari.jpg" alt="Ferrari Testarossa">
+            </div>
         </div>
     </div>
 
-    <!-- mercedes -->
-    <div class="car-card">
-        <a href="mercedes.html">
-            <img src="asset/F1 mercedes.jpg" alt="F1 mercedes">
-        </a>
-        <div class="info">
-            <p class="year">2019</p>
-            <p class="name">Mercedes AMG F1 Champion Car</p>
-            <p class="price">$30.5M</p>
-            <p class="details">100/334 <br> City/Track</p>
+    <!-- Navigation Controls -->
+    <div class="car-navigation">
+        <button class="car-nav-btn prev-car">‹</button>
+        <div class="car-dots">
+            <div class="car-dot active"></div>
+            <div class="car-dot"></div>
+            <div class="car-dot"></div>
         </div>
-    </div>
-
-    <!-- ferrari -->
-    <div class="car-card">
-        <a href="ferrari.html">
-            <img src="asset/Ferrari.jpg" alt="Ferrari">
-        </a>
-        <div class="info">
-            <p class="year">2024</p>
-            <p class="name">Ferrari Testarossa</p>
-            <p class="price">$7M</p>
-            <p class="details">90/210 <br> City/Track</p>
-        </div>
+        <button class="car-nav-btn next-car">›</button>
     </div>
 </div>
- <h1 class = "title">Special offer</h1>
+
+<div class="view-all">
+    <a href="#">VIEW ALL CARS</a>
+</div>
+
+<h1 class="title">Special offer</h1>
+
 <!-- poster part -->
-<div class = "poster-container">
+<div class="poster-container">
 
     <div class="poster">
-        <img src="asset/GTR.jpg"></image>
+        <img src="asset/GTR.jpg" alt="GTR Skyline">
         <div class="poster-text">
             <p>Where skylines meet heaven.</p>
             <p>Get the GTR Skyline R35 with a 35% discount</p>
-            <button class= "poster-button">Learn</button>
+            <button class="poster-button">Learn</button>
         </div>
     </div>
+    
     <div class="poster">
-            <img src="asset/GTR.jpg"></image>
+        <img src="asset/GTR.jpg" alt="GTR Skyline">
         <div class="poster-text">
             <p>Where skylines meet heaven.</p>
-             <p>Get the GTR Skyline R35 with a 35% discount</p>
-             <button class= "poster-button">Learn</button>
+            <p>Get the GTR Skyline R35 with a 35% discount</p>
+            <button class="poster-button">Learn</button>
         </div>
     </div>
+    
     <div class="poster">
-        <img src="asset/GTR.jpg"></image>
+        <img src="asset/GTR.jpg" alt="GTR Skyline">
         <div class="poster-text">
-        <p>Where skylines meet heaven.</p>
-        <p>Get the GTR Skyline R35 with a 35% discount</p>
-        <button class= "poster-button">Learn</button>
-    </div>
+            <p>Where skylines meet heaven.</p>
+            <p>Get the GTR Skyline R35 with a 35% discount</p>
+            <button class="poster-button">Learn</button>
+        </div>
     </div>
 </div>
-</body>
+
 <footer class="footer">
     <div class="footer-content">
         <!-- Performance Cars -->
@@ -214,4 +277,8 @@
         <p>&copy; 2024 Kirby Automobile. All rights reserved. Built with passion for automotive excellence.</p>
     </div>
 </footer>
+
+<script src="slider.js"></script>
+
+</body>
 </html>

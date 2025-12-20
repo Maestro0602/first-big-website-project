@@ -20,18 +20,17 @@ a {
 
 /* Header */
 .header {
-    width: 100%;
-    padding: 20px 50px;
-    position: fixed;
-    top: 0;
-    right: 0;
+    position: absolute;
+    top: 20px;
+    right: 50px;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    z-index: 100;
-    background: rgba(10, 10, 10, 0.95);
-    backdrop-filter: blur(10px);
+    width: max-content;
+    padding: 0 0 10px 0;
+    z-index: 10;
 }
+
 
 .navbar {
     display: flex;
@@ -39,11 +38,15 @@ a {
     list-style: none;
     font-weight: 600;
     font-size: 18px;
-    font-family: 'Orbitron', sans-serif;
     color: white;
     text-transform: uppercase;
     margin-bottom: 8px;
+    font-family: orbitrion;
+    font-style: italic;
 }
+
+
+
 
 .navbar li {
     cursor: pointer;
@@ -54,12 +57,6 @@ a {
     opacity: 0.6;
 }
 
-.header hr {
-    border: none;
-    height: 2px;
-    width: 120%;
-    background: rgba(247, 199, 39, 0.5);
-}
 
 /* Main Container */
 .detail-container {
