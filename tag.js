@@ -14,7 +14,7 @@ function applyFilters() {
 
   active.innerHTML = "";
 
-  cars.forEach(car => {
+  cars.forEach((car) => {
     const match =
       (!s || car.dataset.name.toLowerCase().includes(s)) &&
       (!b || car.dataset.brand === b) &&
@@ -44,9 +44,10 @@ sort.addEventListener("change", () => {
     if (sort.value === "price-asc") return a.dataset.price - b.dataset.price;
     if (sort.value === "price-desc") return b.dataset.price - a.dataset.price;
     if (sort.value === "year-desc") return b.dataset.year - a.dataset.year;
-    if (sort.value === "name-asc") return a.dataset.name.localeCompare(b.dataset.name);
+    if (sort.value === "name-asc")
+      return a.dataset.name.localeCompare(b.dataset.name);
   });
-  cars.forEach(car => container.appendChild(car));
+  cars.forEach((car) => container.appendChild(car));
 });
 
 search.addEventListener("input", applyFilters);

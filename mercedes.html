@@ -4,9 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Mercedes AMG F1 - Kirby Automobile</title>
-    <link rel="stylesheet" href="detail-style.css" />
+    <link rel="stylesheet" href="stylepage.css" />
 </head>
 <body>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="hologram-line"></div>
 
 <header class="header">
     <nav>
@@ -17,19 +21,18 @@
             <li>About us</li>
         </ul>
     </nav>
-    <hr>
 </header>
 
 <div class="detail-container">
     <!-- Left Side - Image Gallery -->
     <div class="image-section">
         <div class="main-image">
-            <img src="asset/F1 mercedes.jpg" alt="Mercedes AMG F1">
+            <img src="asset/F1 mercedes.jpg" alt="Mercedes AMG F1" id="mainImage">
         </div>
         <div class="thumbnail-gallery">
-            <img src="asset/F1 mercedes.jpg" alt="Mercedes 1" class="thumbnail active">
-            <img src="asset/F1 mercedes.jpg" alt="Mercedes 2" class="thumbnail">
-            <img src="asset/F1 mercedes.jpg" alt="Mercedes 3" class="thumbnail">
+            <img src="asset/F1 mercedes.jpg" alt="Mercedes 1" class="thumbnail active" data-index="0">
+            <img src="asset/F1 mercedes.jpg" alt="Mercedes 2" class="thumbnail" data-index="1">
+            <img src="asset/F1 mercedes.jpg" alt="Mercedes 3" class="thumbnail" data-index="2">
         </div>
     </div>
 
@@ -41,12 +44,12 @@
 
         <div class="car-header">
             <span class="year-badge">2019</span>
-            <h1 class="car-title">Mercedes AMG F1 Champion Car</h1>
-            <p class="car-subtitle">Formula 1 World Championship Winner</p>
+            <h1 class="car-title">Mercedes AMG F1</h1>
+            <p class="car-subtitle">Formula 1 World Champion</p>
         </div>
 
         <div class="price-section">
-            <div class="price-main">$30.5M</div>
+            <div class="price-main" id="price">$30.5M</div>
             <p class="price-note">Valid through January 2025. *OAC</p>
         </div>
 
@@ -72,7 +75,7 @@
                     <span class="spec-icon">⚙️</span>
                     <div>
                         <span class="spec-label">Engine</span>
-                        <span class="spec-value">1.6L V6 Turbo Hybrid</span>
+                        <span class="spec-value">1.6L V6 Turbo</span>
                     </div>
                 </div>
                 <div class="spec-item">
@@ -141,8 +144,8 @@
 
         <!-- CTA Buttons -->
         <div class="cta-buttons">
-            <button class="btn-primary">Contact Dealer</button>
-            <button class="btn-secondary">Schedule Test Drive</button>
+            <button class="btn-primary" id="contactBtn">Contact Dealer</button>
+            <button class="btn-secondary" id="testDriveBtn">Schedule Test Drive</button>
         </div>
 
         <!-- Additional Info -->
@@ -164,6 +167,8 @@
         <p>&copy; 2024 Kirby Automobile. All rights reserved.</p>
     </div>
 </footer>
+
+<script src="script.js"></script>
 
 </body>
 </html>
