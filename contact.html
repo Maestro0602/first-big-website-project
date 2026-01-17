@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact Us - Kirby Automobile</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Contact Page Specific Styles */
+        .contact-hero {
+            height: 40vh;
+            min-height: 300px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
+                        url('asset/amg1.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-hero-content h1 {
+            font-family: var(--font-display);
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .contact-hero-content p {
+            font-size: 18px;
+            color: var(--color-gray-300);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-section {
+            padding: 80px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .contact-info {
+            padding: 40px;
+        }
+
+        .contact-info h2 {
+            font-family: var(--font-display);
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .contact-info > p {
+            color: var(--color-gray-400);
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .info-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .info-card {
+            display: flex;
+            gap: 20px;
+            padding: 24px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            transition: var(--transition-normal);
+        }
+
+        .info-card:hover {
+            background: var(--glass-hover);
+            border-color: rgba(212, 175, 55, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--color-gold) 0%, #c5a028 100%);
+            border-radius: var(--radius-md);
+            flex-shrink: 0;
+        }
+
+        .info-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--color-black);
+        }
+
+        .info-content h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .info-content p {
+            color: var(--color-gray-400);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .info-content a {
+            color: var(--color-gold);
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+
+        .info-content a:hover {
+            color: var(--color-white);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .social-link {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            color: var(--color-white);
+            text-decoration: none;
+            transition: var(--transition-normal);
+        }
+
+        .social-link:hover {
+            background: var(--color-gold);
+            border-color: var(--color-gold);
+            color: var(--color-black);
+            transform: translateY(-3px);
+        }
+
+        .social-link svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .contact-form-wrapper {
+            padding: 40px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+        }
+
+        .contact-form-wrapper h3 {
+            font-family: var(--font-display);
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .contact-form-wrapper > p {
+            color: var(--color-gray-400);
+            margin-bottom: 32px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-gray-300);
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            color: var(--color-white);
+            font-family: var(--font-primary);
+            font-size: 15px;
+            transition: var(--transition-normal);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--color-gray-400);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px 32px;
+            background: linear-gradient(135deg, var(--color-gold) 0%, #c5a028 100%);
+            border: none;
+            border-radius: var(--radius-md);
+            color: var(--color-black);
+            font-family: var(--font-primary);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition-normal);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: 80px 0;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .map-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .map-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .map-header h2 {
+            font-family: var(--font-display);
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .map-header p {
+            color: var(--color-gray-400);
+        }
+
+        .map-wrapper {
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            height: 400px;
+            background: var(--glass-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .map-placeholder {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .map-placeholder svg {
+            width: 64px;
+            height: 64px;
+            stroke: var(--color-gold);
+            margin-bottom: 16px;
+        }
+
+        .map-placeholder p {
+            color: var(--color-gray-400);
+        }
+
+        /* Hours Section */
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .hours-card {
+            padding: 24px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            text-align: center;
+        }
+
+        .hours-card h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--color-gold);
+        }
+
+        .hours-card p {
+            color: var(--color-gray-300);
+            font-size: 15px;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            padding: 20px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: var(--radius-md);
+            color: #22c55e;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .contact-info,
+            .contact-form-wrapper {
+                padding: 24px;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<header class="header">
+    <a href="project.html" class="logo">KIRBY</a>
+    <nav>
+        <ul class="navbar">
+            <li><a href="project.html">Home</a></li>
+            <li><a href="tag.html">Inventory</a></li>
+            <li><a href="booking.html">Book Appointment</a></li>
+            <li><a href="service.html">Service</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+    </nav>
+    <a href="booking.html" class="nav-cta">Schedule Visit</a>
+</header>
+
+<!-- Hero Section -->
+<section class="contact-hero">
+    <div class="contact-hero-content">
+        <h1>Get In Touch</h1>
+        <p>Have questions about our collection? We're here to help you find your perfect automobile.</p>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section">
+    <div class="contact-container">
+        
+        <!-- Contact Information -->
+        <div class="contact-info">
+            <h2>Contact Information</h2>
+            <p>Whether you're looking to purchase, consign, or simply learn more about our extraordinary collection, our team of specialists is ready to assist you.</p>
+            
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                    </div>
+                    <div class="info-content">
+                        <h4>Visit Our Showroom</h4>
+                        <p>1234 Luxury Drive<br>Beverly Hills, CA 90210</p>
+                    </div>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                    </div>
+                    <div class="info-content">
+                        <h4>Call Us</h4>
+                        <p><a href="tel:+13105551234">+1 (310) 555-1234</a><br>
+                        <a href="tel:+13105555678">+1 (310) 555-5678</a></p>
+                    </div>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </div>
+                    <div class="info-content">
+                        <h4>Email Us</h4>
+                        <p><a href="mailto:sales@kirbyauto.com">sales@kirbyauto.com</a><br>
+                        <a href="mailto:info@kirbyauto.com">info@kirbyauto.com</a></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Social Links -->
+            <div class="social-links">
+                <a href="#" class="social-link" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg>
+                </a>
+                <a href="#" class="social-link" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+                <a href="#" class="social-link" aria-label="Twitter">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                    </svg>
+                </a>
+                <a href="#" class="social-link" aria-label="YouTube">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                        <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#000"></polygon>
+                    </svg>
+                </a>
+            </div>
+            
+            <!-- Hours -->
+            <div class="hours-grid">
+                <div class="hours-card">
+                    <h4>Mon - Fri</h4>
+                    <p>9:00 AM - 7:00 PM</p>
+                </div>
+                <div class="hours-card">
+                    <h4>Saturday</h4>
+                    <p>10:00 AM - 6:00 PM</p>
+                </div>
+                <div class="hours-card">
+                    <h4>Sunday</h4>
+                    <p>By Appointment</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contact Form -->
+        <div class="contact-form-wrapper">
+            <h3>Send Us a Message</h3>
+            <p>Fill out the form below and we'll get back to you within 24 hours.</p>
+            
+            <form id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" placeholder="John" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <select id="subject" name="subject" required>
+                        <option value="">Select a subject...</option>
+                        <option value="purchase">Vehicle Purchase Inquiry</option>
+                        <option value="consignment">Consignment Services</option>
+                        <option value="financing">Financing Options</option>
+                        <option value="viewing">Schedule Private Viewing</option>
+                        <option value="appraisal">Vehicle Appraisal</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="vehicle">Interested Vehicle (Optional)</label>
+                    <select id="vehicle" name="vehicle">
+                        <option value="">Select a vehicle...</option>
+                        <optgroup label="Pagani">
+                            <option value="pagani-huayra">Pagani Huayra Roadster BC - $5,000,000</option>
+                        </optgroup>
+                        <optgroup label="Ferrari">
+                            <option value="ferrari-sf90">Ferrari SF90 Stradale - $625,000</option>
+                            <option value="ferrari-f40">Ferrari F40 - $2,800,000</option>
+                        </optgroup>
+                        <optgroup label="Lamborghini">
+                            <option value="lamborghini-revuelto">Lamborghini Revuelto - $608,000</option>
+                        </optgroup>
+                        <optgroup label="Porsche">
+                            <option value="porsche-918">Porsche 918 Spyder - $1,900,000</option>
+                            <option value="porsche-gt3rs">Porsche 911 GT3 RS - $250,000</option>
+                        </optgroup>
+                        <optgroup label="McLaren">
+                            <option value="mclaren-p1">McLaren P1 - $2,500,000</option>
+                            <option value="mclaren-750s">McLaren 750S Spider - $335,000</option>
+                        </optgroup>
+                        <optgroup label="Mercedes-AMG">
+                            <option value="mercedes-amg-one">Mercedes-AMG ONE - $2,700,000</option>
+                            <option value="mercedes-f1">Mercedes-AMG F1 W10 - $30,500,000</option>
+                        </optgroup>
+                        <option value="other">Other / Not Listed</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Tell us how we can help you..." required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Send Message</button>
+                
+                <div class="success-message" id="successMessage">
+                    ✓ Your message has been sent successfully! We'll get back to you shortly.
+                </div>
+            </form>
+        </div>
+        
+    </div>
+</section>
+
+<!-- Map Section -->
+<section class="map-section">
+    <div class="map-container">
+        <div class="map-header">
+            <h2>Find Us</h2>
+            <p>Visit our exclusive showroom in Beverly Hills</p>
+        </div>
+        
+        <div class="map-wrapper">
+            <div class="map-placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <p>1234 Luxury Drive, Beverly Hills, CA 90210</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3 class="footer-logo">KIRBY</h3>
+                <p>The world's premier destination for extraordinary automobiles.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="project.html">Home</a>
+                <a href="tag.html">Inventory</a>
+                <a href="booking.html">Book Appointment</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Services</h4>
+                <a href="#">Vehicle Sales</a>
+                <a href="#">Consignment</a>
+                <a href="#">Financing</a>
+                <a href="#">Appraisals</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <a href="tel:+13105551234">+1 (310) 555-1234</a>
+                <a href="mailto:info@kirbyauto.com">info@kirbyauto.com</a>
+                <p style="margin-top: 8px; color: var(--color-gray-400); font-size: 14px;">Beverly Hills, CA</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 Kirby Automobile. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Form submission handler
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Show success message
+        document.getElementById('successMessage').classList.add('show');
+        
+        // Reset form
+        this.reset();
+        
+        // Hide success message after 5 seconds
+        setTimeout(function() {
+            document.getElementById('successMessage').classList.remove('show');
+        }, 5000);
+    });
+
+    // Phone number formatting
+    document.getElementById('phone').addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 0) {
+            if (value.length <= 3) {
+                value = '+1 (' + value;
+            } else if (value.length <= 6) {
+                value = '+1 (' + value.slice(0, 3) + ') ' + value.slice(3);
+            } else {
+                value = '+1 (' + value.slice(0, 3) + ') ' + value.slice(3, 6) + '-' + value.slice(6, 10);
+            }
+        }
+        e.target.value = value;
+    });
+</script>
+
+</body>
+</html>

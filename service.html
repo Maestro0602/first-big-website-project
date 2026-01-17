@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Service Booking - Kirby Automobile</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Service Page Specific Styles */
+        .service-hero {
+            height: 45vh;
+            min-height: 350px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
+                        url('asset/mclarenp1.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-hero-content h1 {
+            font-family: var(--font-display);
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .service-hero-content p {
+            font-size: 18px;
+            color: var(--color-gray-300);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .service-section {
+            padding: 80px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Service Types Grid */
+        .service-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .service-type-card {
+            padding: 32px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            cursor: pointer;
+            transition: var(--transition-normal);
+            position: relative;
+        }
+
+        .service-type-card:hover,
+        .service-type-card.selected {
+            background: var(--glass-hover);
+            border-color: var(--color-gold);
+            transform: translateY(-4px);
+        }
+
+        .service-type-card.selected::after {
+            content: '✓';
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 28px;
+            height: 28px;
+            background: var(--color-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-black);
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--color-gold) 0%, #c5a028 100%);
+            border-radius: var(--radius-lg);
+            margin-bottom: 20px;
+        }
+
+        .service-icon svg {
+            width: 30px;
+            height: 30px;
+            stroke: var(--color-black);
+        }
+
+        .service-type-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .service-type-card p {
+            color: var(--color-gray-400);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .service-price {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-gold);
+        }
+
+        .service-duration {
+            font-size: 13px;
+            color: var(--color-gray-400);
+            margin-top: 4px;
+        }
+
+        /* Booking Form Section */
+        .booking-form-section {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 40px;
+        }
+
+        .form-wrapper {
+            padding: 40px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+        }
+
+        .form-wrapper h2 {
+            font-family: var(--font-display);
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .form-wrapper > p {
+            color: var(--color-gray-400);
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-gray-300);
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            color: var(--color-white);
+            font-family: var(--font-primary);
+            font-size: 15px;
+            transition: var(--transition-normal);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--color-gray-400);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px 32px;
+            background: linear-gradient(135deg, var(--color-gold) 0%, #c5a028 100%);
+            border: none;
+            border-radius: var(--radius-md);
+            color: var(--color-black);
+            font-family: var(--font-primary);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition-normal);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Summary Sidebar */
+        .booking-summary {
+            padding: 32px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .booking-summary h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .summary-item:last-of-type {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            color: var(--color-gray-400);
+            font-size: 14px;
+        }
+
+        .summary-value {
+            font-weight: 500;
+            text-align: right;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .summary-total .label {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .summary-total .price {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-gold);
+        }
+
+        .summary-note {
+            margin-top: 20px;
+            padding: 16px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: var(--radius-md);
+            font-size: 13px;
+            color: var(--color-gray-300);
+            line-height: 1.6;
+        }
+
+        /* Why Choose Us Section */
+        .why-choose-section {
+            padding: 80px 0;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-display);
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .section-header p {
+            color: var(--color-gray-400);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .feature-card {
+            padding: 32px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            transition: var(--transition-normal);
+        }
+
+        .feature-card:hover {
+            background: var(--glass-hover);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.1) 100%);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+        }
+
+        .feature-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--color-gold);
+        }
+
+        .feature-card h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            color: var(--color-gray-400);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Success Modal */
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success-modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--color-dark);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            padding: 48px;
+            text-align: center;
+            max-width: 480px;
+            margin: 24px;
+        }
+
+        .modal-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--color-gold) 0%, #c5a028 100%);
+            border-radius: 50%;
+            margin: 0 auto 24px;
+        }
+
+        .modal-icon svg {
+            width: 40px;
+            height: 40px;
+            stroke: var(--color-black);
+        }
+
+        .modal-content h3 {
+            font-family: var(--font-display);
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .modal-content p {
+            color: var(--color-gray-400);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .modal-btn {
+            padding: 14px 32px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            color: var(--color-white);
+            font-family: var(--font-primary);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-normal);
+        }
+
+        .modal-btn:hover {
+            background: var(--glass-hover);
+            border-color: var(--color-gold);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .booking-form-section {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-summary {
+                position: static;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .form-wrapper,
+            .booking-summary {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<header class="header">
+    <a href="project.html" class="logo">KIRBY</a>
+    <nav>
+        <ul class="navbar">
+            <li><a href="project.html">Home</a></li>
+            <li><a href="tag.html">Inventory</a></li>
+            <li><a href="booking.html">Book Appointment</a></li>
+            <li><a href="service.html" class="active">Service</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <a href="booking.html" class="nav-cta">Schedule Visit</a>
+</header>
+
+<!-- Hero Section -->
+<section class="service-hero">
+    <div class="service-hero-content">
+        <h1>Service & Maintenance</h1>
+        <p>Expert care for your extraordinary automobile by factory-trained technicians</p>
+    </div>
+</section>
+
+<!-- Service Types Section -->
+<section class="service-section">
+    <div class="service-container">
+        
+        <div class="section-header">
+            <h2>Select Your Service</h2>
+            <p>Choose the service package that fits your needs</p>
+        </div>
+        
+        <div class="service-types" id="serviceTypes">
+            
+            <div class="service-type-card" data-service="inspection" data-price="495">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </div>
+                <h3>Pre-Purchase Inspection</h3>
+                <p>Comprehensive 150-point inspection for prospective buyers. Includes mechanical, electrical, and cosmetic assessment.</p>
+                <div class="service-price">$495</div>
+                <div class="service-duration">Duration: 2-3 hours</div>
+            </div>
+            
+            <div class="service-type-card" data-service="maintenance" data-price="1250">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                    </svg>
+                </div>
+                <h3>Full Service</h3>
+                <p>Complete maintenance including oil change, filter replacement, fluid top-up, brake inspection, and tire rotation.</p>
+                <div class="service-price">$1,250</div>
+                <div class="service-duration">Duration: 4-6 hours</div>
+            </div>
+            
+            <div class="service-type-card" data-service="detailing" data-price="850">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 3v18"></path>
+                        <rect x="4" y="8" width="16" height="12" rx="2"></rect>
+                        <path d="M2 8h20"></path>
+                    </svg>
+                </div>
+                <h3>Premium Detailing</h3>
+                <p>Hand wash, clay bar treatment, paint correction, ceramic coating, interior deep clean, and leather conditioning.</p>
+                <div class="service-price">$850</div>
+                <div class="service-duration">Duration: 6-8 hours</div>
+            </div>
+            
+            <div class="service-type-card" data-service="performance" data-price="2500">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                    </svg>
+                </div>
+                <h3>Performance Tune</h3>
+                <p>ECU optimization, dyno testing, suspension tuning, and performance diagnostics for maximum output.</p>
+                <div class="service-price">$2,500</div>
+                <div class="service-duration">Duration: 1-2 days</div>
+            </div>
+            
+            <div class="service-type-card" data-service="storage" data-price="750">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                </div>
+                <h3>Climate Storage</h3>
+                <p>Secure climate-controlled storage with battery maintenance, tire care, and monthly status reports.</p>
+                <div class="service-price">$750/mo</div>
+                <div class="service-duration">Minimum: 3 months</div>
+            </div>
+            
+            <div class="service-type-card" data-service="restoration" data-price="0">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 20h9"></path>
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                    </svg>
+                </div>
+                <h3>Full Restoration</h3>
+                <p>Complete concours-level restoration for classic and vintage automobiles. Custom quote based on assessment.</p>
+                <div class="service-price">Custom Quote</div>
+                <div class="service-duration">Duration: 6-18 months</div>
+            </div>
+            
+        </div>
+        
+        <!-- Booking Form -->
+        <div class="booking-form-section">
+            <div class="form-wrapper">
+                <h2>Schedule Your Service</h2>
+                <p>Fill out the form below and our service team will confirm your appointment.</p>
+                
+                <form id="serviceForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" placeholder="John" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="vehicle">Your Vehicle</label>
+                        <select id="vehicle" name="vehicle" required>
+                            <option value="">Select your vehicle...</option>
+                            <optgroup label="Pagani">
+                                <option value="pagani-huayra">Pagani Huayra</option>
+                                <option value="pagani-zonda">Pagani Zonda</option>
+                            </optgroup>
+                            <optgroup label="Ferrari">
+                                <option value="ferrari-sf90">Ferrari SF90 Stradale</option>
+                                <option value="ferrari-f40">Ferrari F40</option>
+                                <option value="ferrari-other">Other Ferrari</option>
+                            </optgroup>
+                            <optgroup label="Lamborghini">
+                                <option value="lamborghini-revuelto">Lamborghini Revuelto</option>
+                                <option value="lamborghini-aventador">Lamborghini Aventador</option>
+                                <option value="lamborghini-other">Other Lamborghini</option>
+                            </optgroup>
+                            <optgroup label="Porsche">
+                                <option value="porsche-918">Porsche 918 Spyder</option>
+                                <option value="porsche-gt3rs">Porsche 911 GT3 RS</option>
+                                <option value="porsche-other">Other Porsche</option>
+                            </optgroup>
+                            <optgroup label="McLaren">
+                                <option value="mclaren-p1">McLaren P1</option>
+                                <option value="mclaren-750s">McLaren 750S</option>
+                                <option value="mclaren-other">Other McLaren</option>
+                            </optgroup>
+                            <optgroup label="Mercedes-AMG">
+                                <option value="mercedes-amg-one">Mercedes-AMG ONE</option>
+                                <option value="mercedes-other">Other Mercedes-AMG</option>
+                            </optgroup>
+                            <option value="other">Other Exotic/Luxury Vehicle</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date">Preferred Date</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Preferred Time</label>
+                            <select id="time" name="time" required>
+                                <option value="">Select time...</option>
+                                <option value="08:00">8:00 AM</option>
+                                <option value="09:00">9:00 AM</option>
+                                <option value="10:00">10:00 AM</option>
+                                <option value="11:00">11:00 AM</option>
+                                <option value="12:00">12:00 PM</option>
+                                <option value="13:00">1:00 PM</option>
+                                <option value="14:00">2:00 PM</option>
+                                <option value="15:00">3:00 PM</option>
+                                <option value="16:00">4:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="notes">Additional Notes</label>
+                        <textarea id="notes" name="notes" placeholder="Describe any specific concerns, symptoms, or requests..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="submitBtn" disabled>Select a Service Above</button>
+                </form>
+            </div>
+            
+            <!-- Summary Sidebar -->
+            <div class="booking-summary">
+                <h3>Booking Summary</h3>
+                
+                <div class="summary-item">
+                    <span class="summary-label">Selected Service</span>
+                    <span class="summary-value" id="summaryService">None selected</span>
+                </div>
+                
+                <div class="summary-item">
+                    <span class="summary-label">Duration</span>
+                    <span class="summary-value" id="summaryDuration">--</span>
+                </div>
+                
+                <div class="summary-item">
+                    <span class="summary-label">Date</span>
+                    <span class="summary-value" id="summaryDate">Not selected</span>
+                </div>
+                
+                <div class="summary-item">
+                    <span class="summary-label">Time</span>
+                    <span class="summary-value" id="summaryTime">Not selected</span>
+                </div>
+                
+                <div class="summary-total">
+                    <span class="label">Estimated Total</span>
+                    <span class="price" id="summaryPrice">$0</span>
+                </div>
+                
+                <div class="summary-note">
+                    <strong>Note:</strong> Final pricing may vary based on vehicle inspection. A service advisor will contact you to confirm your appointment within 24 hours.
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="why-choose-section">
+    <div class="section-header">
+        <h2>Why Choose Kirby Service</h2>
+        <p>Excellence in every detail</p>
+    </div>
+    
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+            </div>
+            <h4>Factory Certified</h4>
+            <p>Our technicians are factory-trained and certified for all major exotic brands.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+            </div>
+            <h4>Secure Facility</h4>
+            <p>24/7 monitored, climate-controlled facility with comprehensive insurance coverage.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+            </div>
+            <h4>Timely Service</h4>
+            <p>We respect your time with accurate estimates and on-time delivery.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                    <path d="M2 17l10 5 10-5"></path>
+                    <path d="M2 12l10 5 10-5"></path>
+                </svg>
+            </div>
+            <h4>OEM Parts</h4>
+            <p>We use only genuine OEM parts sourced directly from manufacturers.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Success Modal -->
+<div class="success-modal" id="successModal">
+    <div class="modal-content">
+        <div class="modal-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+        </div>
+        <h3>Booking Confirmed!</h3>
+        <p>Your service appointment has been scheduled. A service advisor will contact you within 24 hours to confirm details and provide a loaner vehicle if needed.</p>
+        <button class="modal-btn" onclick="closeModal()">Close</button>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3 class="footer-logo">KIRBY</h3>
+                <p>The world's premier destination for extraordinary automobiles.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="project.html">Home</a>
+                <a href="tag.html">Inventory</a>
+                <a href="booking.html">Book Appointment</a>
+                <a href="service.html">Service</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Services</h4>
+                <a href="service.html">Maintenance</a>
+                <a href="service.html">Detailing</a>
+                <a href="service.html">Performance</a>
+                <a href="service.html">Storage</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <a href="tel:+13105551234">+1 (310) 555-1234</a>
+                <a href="mailto:service@kirbyauto.com">service@kirbyauto.com</a>
+                <p style="margin-top: 8px; color: var(--color-gray-400); font-size: 14px;">Beverly Hills, CA</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 Kirby Automobile. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Service selection
+    let selectedService = null;
+    let selectedPrice = 0;
+    
+    const serviceCards = document.querySelectorAll('.service-type-card');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    serviceCards.forEach(card => {
+        card.addEventListener('click', function() {
+            // Remove selection from all cards
+            serviceCards.forEach(c => c.classList.remove('selected'));
+            
+            // Select this card
+            this.classList.add('selected');
+            
+            // Get service data
+            selectedService = this.dataset.service;
+            selectedPrice = parseInt(this.dataset.price) || 0;
+            
+            // Update summary
+            document.getElementById('summaryService').textContent = this.querySelector('h3').textContent;
+            document.getElementById('summaryDuration').textContent = this.querySelector('.service-duration').textContent.replace('Duration: ', '');
+            document.getElementById('summaryPrice').textContent = selectedPrice > 0 ? '$' + selectedPrice.toLocaleString() : 'TBD';
+            
+            // Enable submit button
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Book Service Appointment';
+        });
+    });
+    
+    // Update summary on date/time change
+    document.getElementById('date').addEventListener('change', function() {
+        const date = new Date(this.value);
+        document.getElementById('summaryDate').textContent = date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    });
+    
+    document.getElementById('time').addEventListener('change', function() {
+        const timeText = this.options[this.selectedIndex].text;
+        document.getElementById('summaryTime').textContent = timeText;
+    });
+    
+    // Phone formatting
+    document.getElementById('phone').addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 0) {
+            if (value.length <= 3) {
+                value = '+1 (' + value;
+            } else if (value.length <= 6) {
+                value = '+1 (' + value.slice(0, 3) + ') ' + value.slice(3);
+            } else {
+                value = '+1 (' + value.slice(0, 3) + ') ' + value.slice(3, 6) + '-' + value.slice(6, 10);
+            }
+        }
+        e.target.value = value;
+    });
+    
+    // Set minimum date to today
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('date').setAttribute('min', today);
+    
+    // Form submission
+    document.getElementById('serviceForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (!selectedService) {
+            alert('Please select a service first.');
+            return;
+        }
+        
+        // Show success modal
+        document.getElementById('successModal').classList.add('show');
+    });
+    
+    function closeModal() {
+        document.getElementById('successModal').classList.remove('show');
+        // Reset form
+        document.getElementById('serviceForm').reset();
+        serviceCards.forEach(c => c.classList.remove('selected'));
+        selectedService = null;
+        selectedPrice = 0;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Select a Service Above';
+        document.getElementById('summaryService').textContent = 'None selected';
+        document.getElementById('summaryDuration').textContent = '--';
+        document.getElementById('summaryDate').textContent = 'Not selected';
+        document.getElementById('summaryTime').textContent = 'Not selected';
+        document.getElementById('summaryPrice').textContent = '$0';
+    }
+</script>
+
+</body>
+</html>

@@ -3,62 +3,70 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Pagani Huayra - Kirby Automobile</title>
-    <link rel="stylesheet" href="detail-style.css" />
+    <title>Pagani Huayra Roadster BC - Kirby Automobile</title>
+    <link rel="stylesheet" href="stylepage.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
+<!-- Navigation -->
 <header class="header">
+    <a href="project.html" class="logo">KIRBY</a>
     <nav>
         <ul class="navbar">
-            <li><a href="index.html">Home</a></li>
-            <li>Tag</li>
-            <li>Compare</li>
-            <li>About us</li>
+            <li><a href="project.html">Home</a></li>
+            <li><a href="tag.html">Inventory</a></li>
+            <li><a href="booking.html">Book Appointment</a></li>
+            <li><a href="contact.html">Contact</a></li>
         </ul>
     </nav>
-    <hr>
+    <a href="booking.html" class="nav-cta">Schedule Visit</a>
 </header>
 
 <div class="detail-container">
     <!-- Left Side - Image Gallery -->
     <div class="image-section">
         <div class="main-image">
-            <img src="asset/pagani.jpg" alt="Pagani Huayra">
+            <img src="asset/pagani.jpg" alt="Pagani Huayra Roadster BC" id="mainImage">
         </div>
         <div class="thumbnail-gallery">
-            <img src="asset/pagani.jpg" alt="Pagani 1" class="thumbnail active">
-            <img src="asset/pagani.jpg" alt="Pagani 2" class="thumbnail">
-            <img src="asset/pagani.jpg" alt="Pagani 3" class="thumbnail">
+            <img src="asset/pagani.jpg" alt="Pagani Front" class="thumbnail active" data-index="0">
+            <img src="asset/Huayra Roadster.jpg" alt="Pagani Side" class="thumbnail" data-index="1">
+            <img src="asset/pagani.jpg" alt="Pagani Rear" class="thumbnail" data-index="2">
+            <img src="asset/paganiInterior.jpg" alt="Pagani Interior" class="thumbnail" data-index="3">
         </div>
     </div>
 
     <!-- Right Side - Details -->
     <div class="details-section">
         <div class="breadcrumb">
-            <a href="project.html">Home</a> / <a href="project.html">Featured Cars</a> / Pagani Huayra
+            <a href="project.html">Home</a>
+            <span>/</span>
+            <a href="project.html#inventory">Inventory</a>
+            <span>/</span>
+            <span>Pagani Huayra Roadster BC</span>
         </div>
 
         <div class="car-header">
-            <span class="year-badge">2025</span>
-            <h1 class="car-title">Pagani Huayra</h1>
+            <span class="year-badge">2025 • Hypercar</span>
+            <h1 class="car-title">Pagani Huayra Roadster BC</h1>
             <p class="car-subtitle">Italian Hypercar Excellence</p>
         </div>
 
         <div class="price-section">
-            <div class="price-main">$5M</div>
-            <p class="price-note">Valid through January 2025. *OAC</p>
+            <div class="price-main">$5,000,000</div>
+            <p class="price-note">Financing available • Limited production</p>
         </div>
 
         <!-- Key Specs -->
         <div class="key-specs">
-            <h3>Key Specifications</h3>
+            <h3>Performance Specifications</h3>
             <div class="specs-grid">
                 <div class="spec-item">
                     <span class="spec-icon">⚡</span>
                     <div>
-                        <span class="spec-label">Max Power</span>
-                        <span class="spec-value">730 HP</span>
+                        <span class="spec-label">Power Output</span>
+                        <span class="spec-value">791 HP</span>
                     </div>
                 </div>
                 <div class="spec-item">
@@ -78,8 +86,8 @@
                 <div class="spec-item">
                     <span class="spec-icon">⏱️</span>
                     <div>
-                        <span class="spec-label">0-60 MPH</span>
-                        <span class="spec-value">3.2 seconds</span>
+                        <span class="spec-label">0-60 mph</span>
+                        <span class="spec-value">2.8 seconds</span>
                     </div>
                 </div>
             </div>
@@ -87,7 +95,7 @@
 
         <!-- Features -->
         <div class="features-section">
-            <h3>Model Features</h3>
+            <h3>Highlights</h3>
             <div class="features-list">
                 <div class="feature-item">
                     <span class="check">✓</span>
@@ -99,7 +107,7 @@
                 </div>
                 <div class="feature-item">
                     <span class="check">✓</span>
-                    <span>Carbon-Titanium Monocoque</span>
+                    <span>Carbon-Titanium Monocoque Chassis</span>
                 </div>
                 <div class="feature-item">
                     <span class="check">✓</span>
@@ -107,7 +115,7 @@
                 </div>
                 <div class="feature-item">
                     <span class="check">✓</span>
-                    <span>Bespoke Audio System</span>
+                    <span>Bespoke Sonus Faber Audio System</span>
                 </div>
                 <div class="feature-item">
                     <span class="check">✓</span>
@@ -122,7 +130,7 @@
             <div class="lease-grid">
                 <div class="lease-item">
                     <span class="lease-label">MSRP</span>
-                    <span class="lease-value">$5.0M</span>
+                    <span class="lease-value">$5,000,000</span>
                 </div>
                 <div class="lease-item">
                     <span class="lease-label">Mileage</span>
@@ -141,19 +149,19 @@
 
         <!-- CTA Buttons -->
         <div class="cta-buttons">
-            <button class="btn-primary">Contact Dealer</button>
-            <button class="btn-secondary">Schedule Viewing</button>
+            <button class="btn-primary" id="contactBtn">Contact Dealer</button>
+            <button class="btn-secondary" id="testDriveBtn">Schedule Viewing</button>
         </div>
 
         <!-- Additional Info -->
         <div class="additional-info">
             <details>
-                <summary>Learn more about this car →</summary>
-                <p>The Pagani Huayra represents the pinnacle of automotive artistry. Every component is meticulously crafted, from the carbon-titanium chassis to the hand-stitched leather interior. Named after the Incan god of wind, this hypercar delivers breathtaking performance with unmatched elegance.</p>
+                <summary>About this vehicle →</summary>
+                <p>The Pagani Huayra Roadster BC represents the pinnacle of automotive artistry. Every component is meticulously crafted, from the carbon-titanium chassis to the hand-stitched leather interior. Named after the Incan god of wind, this hypercar delivers breathtaking performance with unmatched elegance. Limited to just 40 units worldwide.</p>
             </details>
             <details>
-                <summary>Full vehicle specifications →</summary>
-                <p>Complete specifications include detailed information about the AMG-sourced V12 engine, active aerodynamics, suspension geometry, brake systems, and all available customization options through Pagani's Tailor Made program.</p>
+                <summary>Technical specifications →</summary>
+                <p>Complete specifications include detailed information about the AMG-sourced V12 engine, active aerodynamics, suspension geometry, brake systems, and all available customization options through Pagani's exclusive Tailor Made program. Full documentation and provenance certification included.</p>
             </details>
         </div>
     </div>
@@ -161,9 +169,11 @@
 
 <footer class="footer">
     <div class="footer-bottom">
-        <p>&copy; 2024 Kirby Automobile. All rights reserved.</p>
+        <p>&copy; 2026 Kirby Automobile. All rights reserved.</p>
     </div>
 </footer>
+
+<script src="Script.js"></script>
 
 </body>
 </html>

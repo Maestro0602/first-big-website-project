@@ -3,277 +3,559 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Kirby Automobile</title>
+    <title>Kirby Automobile - Luxury Car Dealership</title>
     <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
+<!-- Hero Video Section -->
 <section class="video-slider">
     <div class="video-track">
-        <video class="slide-video" src="asset/pagani.mp4" muted autoplay playsinline></video>
-        <video class="slide-video" src="asset/mercedes.mp4" muted playsinline></video>
-        <video class="slide-video" src="asset/ferrari.mp4" muted playsinline></video>
+        <video class="slide-video" src="asset/pagani.mp4" muted autoplay playsinline loop></video>
+        <video class="slide-video" src="asset/mercedes.mp4" muted playsinline loop></video>
+        <video class="slide-video" src="asset/ferrari.mp4" muted playsinline loop></video>
+    </div>
+    <div class="hero-overlay">
+        <div class="hero-content">
+            <h1 class="hero-title">Kirby Automobile</h1>
+            <p class="hero-subtitle">Where Dreams Meet Performance</p>
+            <a href="#inventory" class="hero-cta">Explore Inventory</a>
+        </div>
     </div>
 </section>
 
-
+<!-- Navigation -->
 <header class="header">
+    <div class="logo">KIRBY</div>
     <nav>
         <ul class="navbar">
-            <li>Home</li>
-            <li>Tag</li>
-            <li>About us</li>
+            <li><a href="project.html" class="active">Home</a></li>
+            <li><a href="tag.html">Inventory</a></li>
+            <li><a href="booking.html">Book Appointment</a></li>
+            <li><a href="service.html">Service</a></li>
+            <li><a href="contact.html">Contact</a></li>
         </ul>
     </nav>
-    <hr>
+    <a href="booking.html" class="nav-cta">Schedule Visit</a>
 </header>
 
-<h1 class="title">Feature cars</h1>
+<!-- Filter Section -->
+<section class="filter-section" id="inventory">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Browse Collection</span>
+            <h2 class="section-title">Find Your Dream Car</h2>
+        </div>
+        
+        <div class="filter-bar glass-panel">
+            <div class="filter-group">
+                <label>Search</label>
+                <div class="search-wrapper">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <input type="text" placeholder="Search make, model, or keyword..." id="searchInput">
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <label>Make</label>
+                <select id="makeFilter">
+                    <option value="">All Makes</option>
+                    <option value="pagani">Pagani</option>
+                    <option value="ferrari">Ferrari</option>
+                    <option value="lamborghini">Lamborghini</option>
+                    <option value="mercedes">Mercedes-AMG</option>
+                    <option value="mclaren">McLaren</option>
+                    <option value="porsche">Porsche</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Price Range</label>
+                <select id="priceFilter">
+                    <option value="">Any Price</option>
+                    <option value="0-500000">Under $500K</option>
+                    <option value="500000-1000000">$500K - $1M</option>
+                    <option value="1000000-3000000">$1M - $3M</option>
+                    <option value="3000000-5000000">$3M - $5M</option>
+                    <option value="5000000-10000000">$5M - $10M</option>
+                    <option value="10000000+">$10M+</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Year</label>
+                <select id="yearFilter">
+                    <option value="">All Years</option>
+                    <option value="2025">2025</option>
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                    <option value="vintage">Vintage (Pre-2000)</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Body Type</label>
+                <select id="bodyFilter">
+                    <option value="">All Types</option>
+                    <option value="hypercar">Hypercar</option>
+                    <option value="supercar">Supercar</option>
+                    <option value="sports">Sports Car</option>
+                    <option value="gt">Grand Tourer</option>
+                    <option value="f1">Formula 1</option>
+                    <option value="classic">Classic</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Sort By</label>
+                <select id="sortFilter">
+                    <option value="featured">Featured</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="year-new">Newest First</option>
+                    <option value="year-old">Oldest First</option>
+                </select>
+            </div>
+            
+            <button class="filter-btn" id="resetFilters">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                    <path d="M3 3v5h5"></path>
+                </svg>
+                Reset
+            </button>
+        </div>
+        
+        <div class="active-filters-bar">
+            <span class="results-count"><strong>10</strong> vehicles available</span>
+            <div class="active-filters" id="activeFilters"></div>
+        </div>
+    </div>
+</section>
 
-<div class="feature-cars">
-    <div class="cars-container">
-        <!-- Pagani Card -->
-        <div class="car-card">
-            <div class="car-content">
-                <h2>Pagani Huayra</h2>
-                <p>An extraordinary hypercar that combines cutting-edge technology with artistic craftsmanship. The Pagani Huayra represents the pinnacle of automotive engineering and design excellence.</p>
-                <div class="car-specs">
-                    <div class="spec-item">
-                        <span class="spec-label">Year</span>
-                        <span class="spec-value">2025</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">Price</span>
-                        <span class="spec-value price">$5M</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">Performance</span>
-                        <span class="spec-value">100/238 City/Track</span>
+<!-- Featured Cars Section -->
+<section class="featured-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Featured Selection</span>
+            <h2 class="section-title">Exceptional Automobiles</h2>
+        </div>
+        
+        <div class="cars-grid">
+            <!-- Car 1 - Pagani Huayra -->
+            <article class="car-card glass-card" data-make="pagani" data-price="5000000" data-year="2025" data-type="hypercar">
+                <div class="car-image">
+                    <span class="car-badge featured">Featured</span>
+                    <span class="car-badge new">New Arrival</span>
+                    <img src="asset/pagani.jpg" alt="Pagani Huayra" class="main-car-img" loading="lazy">
+                    <img src="asset/paganiInterior.jpg" alt="Pagani Huayra Interior" class="interior-car-img" loading="lazy">
+                    <div class="car-quick-view">
+                        <button class="quick-btn">Quick View</button>
                     </div>
                 </div>
-                <button class="read-more">Learn More →</button>
-            </div>
-            <div class="car-image-container">
-                <span class="year">2025</span>
-                <img src="asset/pagani.jpg" alt="Pagani Huayra">
-            </div>
-        </div>
-
-        <!-- Mercedes Card -->
-        <div class="car-card">
-            <div class="car-content">
-                <h2>Mercedes AMG F1 Champion Car</h2>
-                <p>The legendary Formula 1 championship-winning machine. This Mercedes AMG F1 car dominated the track with unparalleled speed, precision, and technological innovation.</p>
-                <div class="car-specs">
-                    <div class="spec-item">
-                        <span class="spec-label">Year</span>
-                        <span class="spec-value">2019</span>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-year">2025</span>
+                        <span class="car-type">Hypercar</span>
                     </div>
-                    <div class="spec-item">
-                        <span class="spec-label">Price</span>
-                        <span class="spec-value price">$30.5M</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">Performance</span>
-                        <span class="spec-value">100/334 City/Track</span>
+                    <h3 class="car-name">Pagani Huayra Roadster BC</h3>
+                    <p class="car-specs-brief">6.0L V12 Twin-Turbo • 791 HP • 238 mph</p>
+                    <div class="car-footer">
+                        <span class="car-price">$5,000,000</span>
+                        <a href="pagani.html" class="car-link">View Details →</a>
                     </div>
                 </div>
-                <button class="read-more">Learn More →</button>
-            </div>
-            <div class="car-image-container">
-                <span class="year">2019</span>
-                <img src="asset/F1 mercedes.jpg" alt="Mercedes AMG F1">
-            </div>
-        </div>
-
-        <!-- Ferrari Card -->
-        <div class="car-card">
-            <div class="car-content">
-                <h2>Ferrari Testarossa</h2>
-                <p>An iconic Italian masterpiece that defined an era. The Ferrari Testarossa combines timeless design with raw power, making it one of the most recognizable supercars in automotive history.</p>
-                <div class="car-specs">
-                    <div class="spec-item">
-                        <span class="spec-label">Year</span>
-                        <span class="spec-value">2024</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">Price</span>
-                        <span class="spec-value price">$7M</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">Performance</span>
-                        <span class="spec-value">90/210 City/Track</span>
+            </article>
+            
+            <!-- Car 2 - Ferrari SF90 -->
+            <article class="car-card glass-card" data-make="ferrari" data-price="625000" data-year="2024" data-type="supercar">
+                <div class="car-image">
+                    <span class="car-badge featured">Featured</span>
+                    <img src="asset/Ferrari.jpg" alt="Ferrari SF90 Stradale" class="main-car-img" loading="lazy">
+                    <img src="asset/SF90 Stradale interrior.avif" alt="Ferrari SF90 Interior" class="interior-car-img" loading="lazy">
+                    <div class="car-quick-view">
+                        <button class="quick-btn">Quick View</button>
                     </div>
                 </div>
-                <button class="read-more">Learn More →</button>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-year">2024</span>
+                        <span class="car-type">Supercar</span>
+                    </div>
+                    <h3 class="car-name">Ferrari SF90 Stradale</h3>
+                    <p class="car-specs-brief">4.0L V8 Hybrid • 986 HP • 211 mph</p>
+                    <div class="car-footer">
+                        <span class="car-price">$625,000</span>
+                        <a href="ferrari-sf90.html" class="car-link">View Details →</a>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Car 3 - Ferrari F40 -->
+            <article class="car-card glass-card" data-make="ferrari" data-price="2800000" data-year="1989" data-type="classic">
+                <div class="car-image">
+                    <span class="car-badge exclusive">Classic</span>
+                    <img src="asset/Ferrari-F40-95448-20-1920x1518.jpeg" alt="Ferrari F40" class="main-car-img" loading="lazy">
+                    <img src="asset/f40 cockpit.jpg" alt="Ferrari F40 Interior" class="interior-car-img" loading="lazy">
+                    <div class="car-quick-view">
+                        <button class="quick-btn">Quick View</button>
+                    </div>
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-year">1989</span>
+                        <span class="car-type">Classic</span>
+                    </div>
+                    <h3 class="car-name">Ferrari F40</h3>
+                    <p class="car-specs-brief">2.9L V8 Twin-Turbo • 471 HP • 201 mph</p>
+                    <div class="car-footer">
+                        <span class="car-price">$2,800,000</span>
+                        <a href="ferrari-f40.html" class="car-link">View Details →</a>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Car 4 - Lamborghini Revuelto -->
+            <article class="car-card glass-card" data-make="lamborghini" data-price="608000" data-year="2024" data-type="supercar">
+                <div class="car-image">
+                    <span class="car-badge new">New Arrival</span>
+                    <img src="asset/2024-lamborghini-revuelto-225-65171e538f3bd.avif" alt="Lamborghini Revuelto" class="main-car-img" loading="lazy">
+                    <img src="asset/e66b25ecaa0fd4eb21ea3fabce9c5dd7x.avif" alt="Lamborghini Revuelto Interior" class="interior-car-img" loading="lazy">
+                    <div class="car-quick-view">
+                        <button class="quick-btn">Quick View</button>
+                    </div>
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-year">2024</span>
+                        <span class="car-type">Supercar</span>
+                    </div>
+                    <h3 class="car-name">Lamborghini Revuelto</h3>
+                    <p class="car-specs-brief">6.5L V12 Hybrid • 1001 HP • 217 mph</p>
+                    <div class="car-footer">
+                        <span class="car-price">$608,000</span>
+                        <a href="lamborghini-revuelto.html" class="car-link">View Details →</a>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Car 5 - Porsche 918 -->
+            <article class="car-card glass-card" data-make="porsche" data-price="1900000" data-year="2015" data-type="hypercar">
+                <div class="car-image">
+                    <span class="car-badge exclusive">Rare</span>
+                    <img src="asset/918spyder.jpg" alt="Porsche 918 Spyder" class="main-car-img" loading="lazy">
+                    <img src="asset/Porsche-918 spyder cp.jpg" alt="Porsche 918 Interior" class="interior-car-img" loading="lazy">
+                    <div class="car-quick-view">
+                        <button class="quick-btn">Quick View</button>
+                    </div>
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-year">2015</span>
+                        <span class="car-type">Hypercar</span>
+                    </div>
+                    <h3 class="car-name">Porsche 918 Spyder</h3>
+                    <p class="car-specs-brief">4.6L V8 Hybrid • 887 HP • 214 mph</p>
+                    <div class="car-footer">
+                        <span class="car-price">$1,900,000</span>
+                        <a href="porsche-918.html" class="car-link">View Details →</a>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Car 7 - Porsche GT3 RS -->
+            <article class="car-card glass-card" data-make="porsche" data-price="250000" data-year="2024" data-type="sports">
+                <div class="car-image">
+                    <span class="car-badge new">New Arrival</span>
+                    <img src="asset/gt3rs.avif" alt="Porsche 911 GT3 RS" class="main-car-img" loading="lazy">
+                    <img src="asset/gt3rscp.webp" alt="Porsche GT3 RS Interior" class="interior-car-img" loading="lazy">
+                    <div class="car-quick-view">
+                        <button class="quick-btn">Quick View</button>
+                    </div>
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-year">2024</span>
+                        <span class="car-type">Sports Car</span>
+                    </div>
+                    <h3 class="car-name">Porsche 911 GT3 RS</h3>
+                    <p class="car-specs-brief">4.0L Flat-6 • 518 HP • 184 mph</p>
+                    <div class="car-footer">
+                        <span class="car-price">$250,000</span>
+                        <a href="porsche-gt3rs.html" class="car-link">View Details →</a>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Car 8 - McLaren P1 -->
+            <article class="car-card glass-card" data-make="mclaren" data-price="2500000" data-year="2015" data-type="hypercar">
+                <div class="car-image">
+                    <span class="car-badge featured">Featured</span>
+                    <span class="car-badge exclusive">Rare</span>
+                    <img src="asset/mclarenp1.jpg" alt="McLaren P1" class="main-car-img" loading="lazy">
+                    <img src="asset/p1 cp.webp" alt="McLaren P1 Interior" class="interior-car-img" loading="lazy">
+                    <div class="car-quick-view">
+                        <button class="quick-btn">Quick View</button>
+                    </div>
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-year">2015</span>
+                        <span class="car-type">Hypercar</span>
+                    </div>
+                    <h3 class="car-name">McLaren P1</h3>
+                    <p class="car-specs-brief">3.8L V8 Hybrid • 903 HP • 217 mph</p>
+                    <div class="car-footer">
+                        <span class="car-price">$2,500,000</span>
+                        <a href="mclaren-p1.html" class="car-link">View Details →</a>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Car 9 - McLaren 750S -->
+            <article class="car-card glass-card" data-make="mclaren" data-price="335000" data-year="2024" data-type="supercar">
+                <div class="car-image">
+                    <span class="car-badge new">New Arrival</span>
+                    <img src="asset/McLaren-750S-Coupe-McLaren-Palm-Beach-orange-race-track-corner-1920.avif" alt="McLaren 750S" class="main-car-img" loading="lazy">
+                    <img src="asset/26mcspider cp.jpg" alt="McLaren 750S Interior" class="interior-car-img" loading="lazy">
+                    <div class="car-quick-view">
+                        <button class="quick-btn">Quick View</button>
+                    </div>
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-year">2024</span>
+                        <span class="car-type">Supercar</span>
+                    </div>
+                    <h3 class="car-name">McLaren 750S Spider</h3>
+                    <p class="car-specs-brief">4.0L V8 Twin-Turbo • 750 HP • 206 mph</p>
+                    <div class="car-footer">
+                        <span class="car-price">$335,000</span>
+                        <a href="mclaren-750s.html" class="car-link">View Details →</a>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Car 10 - Mercedes-AMG ONE -->
+            <article class="car-card glass-card" data-make="mercedes" data-price="2700000" data-year="2024" data-type="hypercar">
+                <div class="car-image">
+                    <span class="car-badge featured">Featured</span>
+                    <span class="car-badge exclusive">Exclusive</span>
+                    <img src="asset/amg1.jpg" alt="Mercedes-AMG ONE" class="main-car-img" loading="lazy">
+                    <img src="asset/amg1 cp.jpg" alt="Mercedes-AMG ONE Interior" class="interior-car-img" loading="lazy">
+                    <div class="car-quick-view">
+                        <button class="quick-btn">Quick View</button>
+                    </div>
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-year">2024</span>
+                        <span class="car-type">Hypercar</span>
+                    </div>
+                    <h3 class="car-name">Mercedes-AMG ONE</h3>
+                    <p class="car-specs-brief">1.6L V6 F1 Hybrid • 1063 HP • 219 mph</p>
+                    <div class="car-footer">
+                        <span class="car-price">$2,700,000</span>
+                        <a href="mercedes-amg-one.html" class="car-link">View Details →</a>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Car 11 - Mercedes F1 W10 -->
+            <article class="car-card glass-card" data-make="mercedes" data-price="30500000" data-year="2019" data-type="f1">
+                <div class="car-image">
+                    <span class="car-badge exclusive">Exclusive</span>
+                    <img src="asset/F1 mercedes.jpg" alt="Mercedes AMG F1" class="main-car-img" loading="lazy">
+                    <img src="asset/f1mercedescp.jpg" alt="Mercedes F1 Cockpit" class="interior-car-img" loading="lazy">
+                    <div class="car-quick-view">
+                        <button class="quick-btn">Quick View</button>
+                    </div>
+                </div>
+                <div class="car-info">
+                    <div class="car-meta">
+                        <span class="car-year">2019</span>
+                        <span class="car-type">Formula 1</span>
+                    </div>
+                    <h3 class="car-name">Mercedes-AMG F1 W10 EQ Power+</h3>
+                    <p class="car-specs-brief">1.6L V6 Hybrid • 1000+ HP • 230 mph</p>
+                    <div class="car-footer">
+                        <span class="car-price">$30,500,000</span>
+                        <a href="mercedes.html" class="car-link">View Details →</a>
+                    </div>
+                </div>
+            </article>
+            
+
+        </div>
+        
+        <div class="view-all">
+            <a href="tag.html" class="view-all-btn">View All Inventory</a>
+        </div>
+    </div>
+</section>
+
+<!-- Special Offers Section -->
+<section class="offers-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Limited Time</span>
+            <h2 class="section-title">Special Offers</h2>
+        </div>
+        
+        <div class="offers-grid">
+            <div class="offer-card glass-card large">
+                <div class="offer-image">
+                    <img src="asset/Ferrari.jpg" alt="Ferrari F40 Special Offer">
+                </div>
+                <div class="offer-content">
+                    <span class="offer-tag">15% OFF</span>
+                    <h3>Ferrari F40 Exclusive</h3>
+                    <p>Own a piece of automotive history. The legendary F40 - the last Ferrari personally approved by Enzo Ferrari.</p>
+                    <div class="offer-details">
+                        <div class="offer-price">
+                            <span class="original">$2,800,000</span>
+                            <span class="current">$2,380,000</span>
+                        </div>
+                        <a href="ferrari-f40.html" class="offer-btn">Claim Offer</a>
+                    </div>
+                </div>
             </div>
-            <div class="car-image-container">
-                <span class="year">2024</span>
-                <img src="asset/Ferrari.jpg" alt="Ferrari Testarossa">
+            
+            <div class="offer-card glass-card">
+                <div class="offer-image">
+                    <img src="asset/pagani.jpg" alt="Pagani Finance Offer">
+                </div>
+                <div class="offer-content">
+                    <span class="offer-tag">0% APR</span>
+                    <h3>Premium Financing</h3>
+                    <p>0% APR for 36 months on select Pagani models. Limited time offer.</p>
+                    <a href="#" class="offer-btn secondary">Learn More</a>
+                </div>
+            </div>
+            
+            <div class="offer-card glass-card">
+                <div class="offer-image">
+                    <img src="asset/Ferrari.jpg" alt="Ferrari Trade-In Offer">
+                </div>
+                <div class="offer-content">
+                    <span class="offer-tag">Trade-In Bonus</span>
+                    <h3>Upgrade Program</h3>
+                    <p>Get an additional $50,000 on your trade-in when you upgrade to a new Ferrari.</p>
+                    <a href="#" class="offer-btn secondary">Learn More</a>
+                </div>
             </div>
         </div>
     </div>
+</section>
 
-    <!-- Navigation Controls -->
-    <div class="car-navigation">
-        <button class="car-nav-btn prev-car">‹</button>
-        <div class="car-dots">
-            <div class="car-dot active"></div>
-            <div class="car-dot"></div>
-            <div class="car-dot"></div>
+<!-- Why Choose Us Section -->
+<section class="why-section">
+    <div class="container">
+        <div class="section-header center">
+            <span class="section-tag">Why Kirby</span>
+            <h2 class="section-title">The Kirby Difference</h2>
         </div>
-        <button class="car-nav-btn next-car">›</button>
-    </div>
-</div>
-
-<div class="view-all">
-    <a href="#">VIEW ALL CARS</a>
-</div>
-
-<h1 class="title">Special offer</h1>
-
-<!-- poster part -->
-<div class="poster-container">
-
-    <div class="poster">
-        <img src="asset/GTR.jpg" alt="GTR Skyline">
-        <div class="poster-text">
-            <p>Where skylines meet heaven.</p>
-            <p>Get the GTR Skyline R35 with a 35% discount</p>
-            <button class="poster-button">Learn</button>
-        </div>
-    </div>
-    
-    <div class="poster">
-        <img src="asset/GTR.jpg" alt="GTR Skyline">
-        <div class="poster-text">
-            <p>Where skylines meet heaven.</p>
-            <p>Get the GTR Skyline R35 with a 35% discount</p>
-            <button class="poster-button">Learn</button>
+        
+        <div class="features-grid">
+            <div class="feature-card glass-card">
+                <div class="feature-icon">🏆</div>
+                <h3>Curated Collection</h3>
+                <p>Every vehicle in our inventory is hand-selected and thoroughly inspected to meet our exacting standards.</p>
+            </div>
+            
+            <div class="feature-card glass-card">
+                <div class="feature-icon">🔐</div>
+                <h3>Verified History</h3>
+                <p>Complete documentation, service records, and provenance verification for every automobile.</p>
+            </div>
+            
+            <div class="feature-card glass-card">
+                <div class="feature-icon">🌍</div>
+                <h3>Global Delivery</h3>
+                <p>Secure worldwide shipping with white-glove service and real-time tracking.</p>
+            </div>
+            
+            <div class="feature-card glass-card">
+                <div class="feature-icon">💎</div>
+                <h3>Concierge Service</h3>
+                <p>Dedicated specialists available 24/7 to assist with every aspect of your purchase.</p>
+            </div>
         </div>
     </div>
-    
-    <div class="poster">
-        <img src="asset/GTR.jpg" alt="GTR Skyline">
-        <div class="poster-text">
-            <p>Where skylines meet heaven.</p>
-            <p>Get the GTR Skyline R35 with a 35% discount</p>
-            <button class="poster-button">Learn</button>
-        </div>
-    </div>
-</div>
+</section>
 
+<!-- Footer -->
 <footer class="footer">
-    <div class="footer-content">
-        <!-- Performance Cars -->
-        <div class="footer-column">
-            <h3>Performance</h3>
-            <ul>
-                <li><a href="#">GTR Skyline</a></li>
-                <li><a href="#">Pagani Huayra</a></li>
-                <li><a href="#">Ferrari Testarossa</a></li>
-                <li><a href="#">Mercedes AMG</a></li>
-                <li><a href="#">Lamborghini</a></li>
-                <li><a href="#">McLaren</a></li>
-            </ul>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3 class="footer-logo">KIRBY</h3>
+                <p>The world's premier destination for extraordinary automobiles. Since 2015.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="YouTube">📺</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Inventory</h4>
+                <ul>
+                    <li><a href="#">Hypercars</a></li>
+                    <li><a href="#">Supercars</a></li>
+                    <li><a href="#">Classics</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Coming Soon</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Financing</a></li>
+                    <li><a href="#">Trade-In</a></li>
+                    <li><a href="#">Consignment</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Insurance</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <ul>
+                    <li>📍 Beverly Hills, CA</li>
+                    <li>📞 +1 (310) 555-0123</li>
+                    <li>✉️ info@kirbyauto.com</li>
+                </ul>
+            </div>
         </div>
         
-        <!-- Classic Cars -->
-        <div class="footer-column">
-            <h3>Classics</h3>
-            <ul>
-                <li><a href="#">Muscle Cars</a></li>
-                <li><a href="#">Vintage Sports</a></li>
-                <li><a href="#">JDM Legends</a></li>
-                <li><a href="#">Euro Classics</a></li>
-                <li><a href="#">Supercars</a></li>
-                <li><a href="#">Hypercars</a></li>
-            </ul>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Kirby Automobile. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Cookie Settings</a>
+            </div>
         </div>
-        
-        <!-- Collections -->
-        <div class="footer-column">
-            <h3>Collections</h3>
-            <ul>
-                <li><a href="#">New Arrivals</a></li>
-                <li><a href="#">Featured Cars</a></li>
-                <li><a href="#">Special Offers</a></li>
-                <li><a href="#">Limited Edition</a></li>
-                <li><a href="#">Pre-Owned</a></li>
-                <li><a href="#">Coming Soon</a></li>
-            </ul>
-        </div>
-        
-        <!-- Services -->
-        <div class="footer-column">
-            <h3>Services</h3>
-            <ul>
-                <li><a href="#">Test Drive</a></li>
-                <li><a href="#">Financing</a></li>
-                <li><a href="#">Insurance</a></li>
-                <li><a href="#">Maintenance</a></li>
-                <li><a href="#">Customization</a></li>
-                <li><a href="#">Trade-In</a></li>
-            </ul>
-        </div>
-        
-        <!-- About -->
-        <div class="footer-column">
-            <h3>About Us</h3>
-            <ul>
-                <li><a href="#">Our Story</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Careers</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Press</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-            </ul>
-        </div>
-    </div>
-    
-    <!-- Social Links -->
-    <div class="footer-social">
-        <a href="https://facebook.com/yourprofile" target="_blank" class="social-link">
-            <span class="social-icon">📘</span>
-            <span>Facebook</span>
-            <span class="plus">+</span>
-        </a>
-        
-        <a href="https://instagram.com/yourprofile" target="_blank" class="social-link">
-            <span class="social-icon">📷</span>
-            <span>Instagram</span>
-            <span class="plus">+</span>
-        </a>
-        
-        <a href="https://github.com/yourprofile" target="_blank" class="social-link">
-            <span class="social-icon">💻</span>
-            <span>GitHub</span>
-            <span class="plus">+</span>
-        </a>
-        
-        <a href="https://youtube.com/yourchannel" target="_blank" class="social-link">
-            <span class="social-icon">📺</span>
-            <span>YouTube</span>
-            <span class="plus">+</span>
-        </a>
-        
-        <a href="https://twitter.com/yourprofile" target="_blank" class="social-link">
-            <span class="social-icon">🐦</span>
-            <span>X (Twitter)</span>
-            <span class="plus">+</span>
-        </a>
-        
-        <a href="https://tiktok.com/@yourprofile" target="_blank" class="social-link">
-            <span class="social-icon">🎵</span>
-            <span>TikTok</span>
-            <span class="plus">+</span>
-        </a>
-    </div>
-    
-    <!-- Copyright -->
-    <div class="footer-bottom">
-        <p>&copy; 2024 Kirby Automobile. All rights reserved. Built with passion for automotive excellence.</p>
     </div>
 </footer>
 

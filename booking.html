@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Book Appointment - Kirby Automobile</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Booking Page Specific Styles */
+        .booking-hero {
+            height: 40vh;
+            min-height: 300px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
+                        url('asset/pagani.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .booking-hero-content h1 {
+            font-family: var(--font-display);
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .booking-hero-content p {
+            font-size: 18px;
+            color: var(--color-gray-300);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .booking-section {
+            padding: 80px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .booking-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .booking-form-wrapper {
+            padding: 40px;
+        }
+
+        .booking-form-wrapper h2 {
+            font-family: var(--font-display);
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .booking-form-wrapper > p {
+            color: var(--color-gray-400);
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-gray-300);
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 16px 20px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            color: var(--color-white);
+            font-family: var(--font-primary);
+            font-size: 15px;
+            transition: var(--transition-normal);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--color-gray-400);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-gray-400);
+            background: var(--glass-hover);
+        }
+
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            cursor: pointer;
+        }
+
+        .form-group select option {
+            background: #111;
+            color: var(--color-white);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px 40px;
+            background: var(--color-white);
+            color: var(--color-bg);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border: none;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: var(--transition-normal);
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 40px rgba(255,255,255,0.2);
+        }
+
+        /* Booking Info Sidebar */
+        .booking-info {
+            padding: 40px;
+        }
+
+        .info-card {
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .info-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .info-card h3 span {
+            font-size: 24px;
+        }
+
+        .info-card p {
+            font-size: 14px;
+            color: var(--color-gray-400);
+            line-height: 1.7;
+        }
+
+        .info-card ul {
+            margin-top: 16px;
+        }
+
+        .info-card ul li {
+            font-size: 14px;
+            color: var(--color-gray-300);
+            padding: 8px 0;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .contact-info {
+            margin-top: 32px;
+        }
+
+        .contact-info h4 {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-gray-300);
+            margin-bottom: 16px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            font-size: 15px;
+            color: var(--color-gray-200);
+        }
+
+        .contact-item span {
+            font-size: 20px;
+        }
+
+        /* Appointment Types */
+        .appointment-types {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .type-option {
+            position: relative;
+        }
+
+        .type-option input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .type-option label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 20px 16px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition-normal);
+            text-align: center;
+        }
+
+        .type-option label span.icon {
+            font-size: 28px;
+        }
+
+        .type-option label span.text {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .type-option input:checked + label {
+            background: var(--glass-hover);
+            border-color: var(--color-white);
+        }
+
+        .type-option label:hover {
+            background: var(--glass-hover);
+            border-color: var(--color-gray-400);
+        }
+
+        @media (max-width: 992px) {
+            .booking-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .appointment-types {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<header class="header">
+    <a href="project.html" class="logo">KIRBY</a>
+    <nav>
+        <ul class="navbar">
+            <li><a href="project.html">Home</a></li>
+            <li><a href="tag.html">Inventory</a></li>
+            <li><a href="booking.html" class="active">Book Appointment</a></li>
+            <li><a href="service.html">Service</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <a href="booking.html" class="nav-cta">Schedule Visit</a>
+</header>
+
+<!-- Hero Section -->
+<section class="booking-hero">
+    <div class="booking-hero-content">
+        <h1>Book Your Appointment</h1>
+        <p>Schedule a private viewing or test drive with our expert concierge team</p>
+    </div>
+</section>
+
+<!-- Booking Form Section -->
+<section class="booking-section">
+    <div class="container">
+        <div class="booking-container">
+            <!-- Form -->
+            <div class="booking-form-wrapper glass-panel">
+                <h2>Schedule Your Visit</h2>
+                <p>Fill out the form below and our team will confirm your appointment within 24 hours.</p>
+                
+                <form id="bookingForm" action="payment.html" method="get">
+                    <!-- Appointment Type -->
+                    <div class="form-group">
+                        <label>Type of Appointment</label>
+                        <div class="appointment-types">
+                            <div class="type-option">
+                                <input type="radio" name="appointmentType" id="testDrive" value="test-drive" checked>
+                                <label for="testDrive">
+                                    <span class="icon">🚗</span>
+                                    <span class="text">Test Drive</span>
+                                </label>
+                            </div>
+                            <div class="type-option">
+                                <input type="radio" name="appointmentType" id="privateView" value="private-viewing">
+                                <label for="privateView">
+                                    <span class="icon">👁️</span>
+                                    <span class="text">Private Viewing</span>
+                                </label>
+                            </div>
+                            <div class="type-option">
+                                <input type="radio" name="appointmentType" id="consultation" value="consultation">
+                                <label for="consultation">
+                                    <span class="icon">💼</span>
+                                    <span class="text">Consultation</span>
+                                </label>
+                            </div>
+                            <div class="type-option">
+                                <input type="radio" name="appointmentType" id="purchase" value="purchase">
+                                <label for="purchase">
+                                    <span class="icon">🔑</span>
+                                    <span class="text">Purchase</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Personal Info -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" placeholder="John" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567" required>
+                        </div>
+                    </div>
+
+                    <!-- Vehicle Selection -->
+                    <div class="form-group">
+                        <label for="vehicle">Vehicle of Interest</label>
+                        <select id="vehicle" name="vehicle" required>
+                            <option value="">Select a Vehicle</option>
+                            <optgroup label="Pagani">
+                                <option value="pagani-huayra">Pagani Huayra Roadster BC - $5,000,000</option>
+                            </optgroup>
+                            <optgroup label="Ferrari">
+                                <option value="ferrari-sf90">Ferrari SF90 Stradale - $625,000</option>
+                                <option value="ferrari-f40">Ferrari F40 - $2,800,000</option>
+                            </optgroup>
+                            <optgroup label="Lamborghini">
+                                <option value="lamborghini-revuelto">Lamborghini Revuelto - $608,000</option>
+                            </optgroup>
+                            <optgroup label="Porsche">
+                                <option value="porsche-918">Porsche 918 Spyder - $1,900,000</option>
+                                <option value="porsche-gt3rs">Porsche 911 GT3 RS - $250,000</option>
+                            </optgroup>
+                            <optgroup label="McLaren">
+                                <option value="mclaren-p1">McLaren P1 - $2,500,000</option>
+                                <option value="mclaren-750s">McLaren 750S Spider - $335,000</option>
+                            </optgroup>
+                            <optgroup label="Mercedes-AMG">
+                                <option value="mercedes-amg-one">Mercedes-AMG ONE - $2,700,000</option>
+                                <option value="mercedes-f1">Mercedes-AMG F1 W10 - $30,500,000</option>
+                            </optgroup>
+                            <option value="other">Other / Not Sure</option>
+                        </select>
+                    </div>
+
+                    <!-- Date & Time -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date">Preferred Date</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Preferred Time</label>
+                            <select id="time" name="time" required>
+                                <option value="">Select Time</option>
+                                <option value="09:00">9:00 AM</option>
+                                <option value="10:00">10:00 AM</option>
+                                <option value="11:00">11:00 AM</option>
+                                <option value="12:00">12:00 PM</option>
+                                <option value="13:00">1:00 PM</option>
+                                <option value="14:00">2:00 PM</option>
+                                <option value="15:00">3:00 PM</option>
+                                <option value="16:00">4:00 PM</option>
+                                <option value="17:00">5:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Additional Notes -->
+                    <div class="form-group">
+                        <label for="notes">Additional Notes (Optional)</label>
+                        <textarea id="notes" name="notes" placeholder="Tell us about any specific requirements or questions..."></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="submit-btn">Proceed to Payment</button>
+                </form>
+            </div>
+
+            <!-- Info Sidebar -->
+            <div class="booking-info">
+                <div class="info-card glass-card">
+                    <h3><span>📍</span> Visit Our Showroom</h3>
+                    <p>Experience our collection in person at our Beverly Hills flagship location.</p>
+                    <ul>
+                        <li>✓ Private viewing rooms</li>
+                        <li>✓ Complimentary refreshments</li>
+                        <li>✓ Expert consultants</li>
+                        <li>✓ Flexible scheduling</li>
+                    </ul>
+                </div>
+
+                <div class="info-card glass-card">
+                    <h3><span>🏆</span> Premium Experience</h3>
+                    <p>Every appointment includes our signature concierge service.</p>
+                    <ul>
+                        <li>✓ Personalized vehicle presentation</li>
+                        <li>✓ Extended test drive options</li>
+                        <li>✓ Financing consultation</li>
+                        <li>✓ Trade-in evaluation</li>
+                    </ul>
+                </div>
+
+                <div class="contact-info">
+                    <h4>Need Immediate Assistance?</h4>
+                    <div class="contact-item">
+                        <span>📞</span>
+                        +1 (310) 555-0123
+                    </div>
+                    <div class="contact-item">
+                        <span>✉️</span>
+                        concierge@kirbyauto.com
+                    </div>
+                    <div class="contact-item">
+                        <span>🕐</span>
+                        Mon - Sat: 9AM - 7PM
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3 class="footer-logo">KIRBY</h3>
+                <p>The world's premier destination for extraordinary automobiles. Since 2015.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="YouTube">📺</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Inventory</h4>
+                <ul>
+                    <li><a href="#">Hypercars</a></li>
+                    <li><a href="#">Supercars</a></li>
+                    <li><a href="#">Classics</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Financing</a></li>
+                    <li><a href="#">Trade-In</a></li>
+                    <li><a href="#">Consignment</a></li>
+                    <li><a href="#">Shipping</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <ul>
+                    <li>📍 Beverly Hills, CA</li>
+                    <li>📞 +1 (310) 555-0123</li>
+                    <li>✉️ info@kirbyauto.com</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 Kirby Automobile. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Cookie Settings</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Set minimum date to today
+    document.getElementById('date').min = new Date().toISOString().split('T')[0];
+</script>
+
+</body>
+</html>

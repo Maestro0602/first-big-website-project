@@ -6,22 +6,24 @@ const interval = 8000; // 8 seconds
 let autoSlideTimer;
 
 // Create navigation controls
-const controlsHTML = `
-    <div class="slider-controls">
-        <button class="slider-btn prev-btn">‹</button>
-        <div class="slider-indicators">
-            ${Array.from(videos).map((_, i) => `
-                <div class="indicator ${i === 0 ? 'active' : ''}" data-index="${i}"></div>
-            `).join('')}
+const videoSlider = document.querySelector('.video-slider');
+if (videoSlider) {
+    const controlsHTML = `
+        <div class="slider-controls">
+            <button class="slider-btn prev-btn" aria-label="Previous slide">‹</button>
+            <div class="slider-indicators">
+                ${Array.from(videos).map((_, i) => `
+                    <div class="indicator ${i === 0 ? 'active' : ''}" data-index="${i}"></div>
+                `).join('')}
+            </div>
+            <button class="slider-btn next-btn" aria-label="Next slide">›</button>
         </div>
-        <button class="slider-btn next-btn">›</button>
-    </div>
-    <div class="progress-bar">
-        <div class="progress-fill"></div>
-    </div>
-`;
-
-document.querySelector('.video-slider').insertAdjacentHTML('beforeend', controlsHTML);
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    `;
+    videoSlider.insertAdjacentHTML('beforeend', controlsHTML);
+}
 
 const indicators = document.querySelectorAll('.indicator');
 const prevBtn = document.querySelector('.prev-btn');
